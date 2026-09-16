@@ -1,0 +1,1104 @@
+{
+  "metadata": {
+    "snapshot_id": "rg-pypi-snap-20260915-90e87784-d2",
+    "ecosystem": "pypi",
+    "schema_version": "1.0",
+    "timestamp": "2026-09-15T05:04:11.215959+00:00",
+    "seeds": [
+      "requests",
+      "flask",
+      "django",
+      "fastapi",
+      "pytest"
+    ],
+    "max_depth": 2,
+    "node_count": 35,
+    "edge_count": 38
+  },
+  "nodes": [
+    {
+      "id": "requests",
+      "name": "requests",
+      "ecosystem": "pypi",
+      "version": "2.34.2",
+      "direct_deps": {
+        "charset-normalizer": "<4,>=2",
+        "idna": "<4,>=2.5",
+        "urllib3": "<3,>=1.26",
+        "certifi": ">=2023.5.7"
+      },
+      "all_deps": [
+        "charset-normalizer",
+        "idna",
+        "urllib3",
+        "certifi"
+      ],
+      "publish_date": "2026-05-14T19:25:26.443000Z",
+      "maintainers": [
+        "Kenneth Reitz",
+        "Ian Stapleton Cordasco",
+        "Nate Prewitt"
+      ],
+      "license": "Apache-2.0",
+      "downloads": null,
+      "description": "Python HTTP for Humans.",
+      "in_degree": 0,
+      "out_degree": 4,
+      "reachability_count": 0,
+      "composite_score": 0.0,
+      "vulnerabilities": []
+    },
+    {
+      "id": "flask",
+      "name": "flask",
+      "ecosystem": "pypi",
+      "version": "3.1.3",
+      "direct_deps": {
+        "blinker": ">=1.9.0",
+        "click": ">=8.1.3",
+        "importlib-metadata": ">=3.6.0",
+        "itsdangerous": ">=2.2.0",
+        "jinja2": ">=3.1.2",
+        "markupsafe": ">=2.1.1",
+        "werkzeug": ">=3.1.0"
+      },
+      "all_deps": [
+        "blinker",
+        "click",
+        "importlib-metadata",
+        "itsdangerous",
+        "jinja2",
+        "markupsafe",
+        "werkzeug"
+      ],
+      "publish_date": "2026-02-19T05:00:56.027585Z",
+      "maintainers": [
+        "Pallets"
+      ],
+      "license": "BSD-3-Clause",
+      "downloads": null,
+      "description": "A simple framework for building complex web applications.",
+      "in_degree": 0,
+      "out_degree": 7,
+      "reachability_count": 0,
+      "composite_score": 0.0,
+      "vulnerabilities": []
+    },
+    {
+      "id": "django",
+      "name": "django",
+      "ecosystem": "pypi",
+      "version": "6.1.1",
+      "direct_deps": {
+        "asgiref": ">=3.9.1",
+        "sqlparse": ">=0.5.0",
+        "tzdata": "*"
+      },
+      "all_deps": [
+        "asgiref",
+        "sqlparse",
+        "tzdata"
+      ],
+      "publish_date": "2026-09-02T17:20:39.153093Z",
+      "maintainers": [
+        "Django Software Foundation"
+      ],
+      "license": "BSD-3-Clause",
+      "downloads": null,
+      "description": "A high-level Python web framework that encourages rapid development and clean, pragmatic design.",
+      "in_degree": 0,
+      "out_degree": 3,
+      "reachability_count": 0,
+      "composite_score": 0.0,
+      "vulnerabilities": []
+    },
+    {
+      "id": "fastapi",
+      "name": "fastapi",
+      "ecosystem": "pypi",
+      "version": "0.141.1",
+      "direct_deps": {
+        "starlette": ">=0.46.0",
+        "pydantic": ">=2.9.0",
+        "typing-extensions": ">=4.8.0",
+        "typing-inspection": ">=0.4.2",
+        "annotated-doc": ">=0.0.2"
+      },
+      "all_deps": [
+        "starlette",
+        "pydantic",
+        "typing-extensions",
+        "typing-inspection",
+        "annotated-doc"
+      ],
+      "publish_date": "2026-07-29T17:18:04.364385Z",
+      "maintainers": [
+        "Sebasti\u00e1n Ram\u00edrez"
+      ],
+      "license": "MIT",
+      "downloads": null,
+      "description": "FastAPI framework, high performance, easy to learn, fast to code, ready for production",
+      "in_degree": 0,
+      "out_degree": 5,
+      "reachability_count": 0,
+      "composite_score": 0.0,
+      "vulnerabilities": []
+    },
+    {
+      "id": "pytest",
+      "name": "pytest",
+      "ecosystem": "pypi",
+      "version": "9.1.1",
+      "direct_deps": {
+        "colorama": ">=0.4",
+        "exceptiongroup": ">=1",
+        "iniconfig": ">=1.0.1",
+        "packaging": ">=22",
+        "pluggy": "<2,>=1.5",
+        "pygments": ">=2.7.2",
+        "tomli": ">=1"
+      },
+      "all_deps": [
+        "colorama",
+        "exceptiongroup",
+        "iniconfig",
+        "packaging",
+        "pluggy",
+        "pygments",
+        "tomli"
+      ],
+      "publish_date": "2026-06-19T10:58:31.347074Z",
+      "maintainers": [
+        "Brianna Laugher",
+        "Bruno Oliveira",
+        "Floris Bruynooghe",
+        "Freya Bruhin",
+        "Holger Krekel",
+        "Others (See AUTHORS)",
+        "Ronny Pfannschmidt"
+      ],
+      "license": "MIT",
+      "downloads": null,
+      "description": "pytest: simple powerful testing with Python",
+      "in_degree": 0,
+      "out_degree": 7,
+      "reachability_count": 0,
+      "composite_score": 0.0,
+      "vulnerabilities": []
+    },
+    {
+      "id": "charset-normalizer",
+      "name": "charset-normalizer",
+      "ecosystem": "pypi",
+      "version": "3.5.1",
+      "direct_deps": {},
+      "all_deps": [],
+      "publish_date": "2026-08-15T08:16:22.964547Z",
+      "maintainers": [
+        "\"Ahmed R. TAHRI\""
+      ],
+      "license": "MIT",
+      "downloads": null,
+      "description": "The Real First Universal Charset Detector. Open, modern and actively maintained alternative to Chardet.",
+      "in_degree": 0,
+      "out_degree": 0,
+      "reachability_count": 0,
+      "composite_score": 0.0,
+      "vulnerabilities": []
+    },
+    {
+      "id": "idna",
+      "name": "idna",
+      "ecosystem": "pypi",
+      "version": "3.19",
+      "direct_deps": {},
+      "all_deps": [],
+      "publish_date": "2026-08-18T05:14:22.343598Z",
+      "maintainers": [
+        "Kim Davies"
+      ],
+      "license": "BSD-3-Clause",
+      "downloads": null,
+      "description": "Internationalized Domain Names in Applications (IDNA)",
+      "in_degree": 0,
+      "out_degree": 0,
+      "reachability_count": 0,
+      "composite_score": 0.0,
+      "vulnerabilities": []
+    },
+    {
+      "id": "urllib3",
+      "name": "urllib3",
+      "ecosystem": "pypi",
+      "version": "2.7.0",
+      "direct_deps": {},
+      "all_deps": [],
+      "publish_date": "2026-05-07T16:13:17.151740Z",
+      "maintainers": [
+        "Andrey Petrov",
+        "Seth Michael Larson",
+        "Quentin Pradet",
+        "Illia Volochii"
+      ],
+      "license": "MIT",
+      "downloads": null,
+      "description": "HTTP library with thread-safe connection pooling, file post, and more.",
+      "in_degree": 0,
+      "out_degree": 0,
+      "reachability_count": 0,
+      "composite_score": 0.0,
+      "vulnerabilities": []
+    },
+    {
+      "id": "certifi",
+      "name": "certifi",
+      "ecosystem": "pypi",
+      "version": "2026.7.22",
+      "direct_deps": {},
+      "all_deps": [],
+      "publish_date": "2026-07-22T03:35:11.276376Z",
+      "maintainers": [
+        "Kenneth Reitz",
+        "me@kennethreitz.com"
+      ],
+      "license": "MPL-2.0",
+      "downloads": null,
+      "description": "Python package for providing Mozilla's CA Bundle.",
+      "in_degree": 0,
+      "out_degree": 0,
+      "reachability_count": 0,
+      "composite_score": 0.0,
+      "vulnerabilities": []
+    },
+    {
+      "id": "blinker",
+      "name": "blinker",
+      "ecosystem": "pypi",
+      "version": "1.9.0",
+      "direct_deps": {},
+      "all_deps": [],
+      "publish_date": "2024-11-08T17:25:46.184412Z",
+      "maintainers": [
+        "Jason Kirtland",
+        "Pallets Ecosystem"
+      ],
+      "license": null,
+      "downloads": null,
+      "description": "Fast, simple object-to-object and broadcast signaling",
+      "in_degree": 0,
+      "out_degree": 0,
+      "reachability_count": 0,
+      "composite_score": 0.0,
+      "vulnerabilities": []
+    },
+    {
+      "id": "click",
+      "name": "click",
+      "ecosystem": "pypi",
+      "version": "8.5.0",
+      "direct_deps": {},
+      "all_deps": [],
+      "publish_date": "2026-08-26T13:33:12.928043Z",
+      "maintainers": [
+        "Pallets"
+      ],
+      "license": "BSD-3-Clause",
+      "downloads": null,
+      "description": "Composable command line interface toolkit",
+      "in_degree": 0,
+      "out_degree": 0,
+      "reachability_count": 0,
+      "composite_score": 0.0,
+      "vulnerabilities": []
+    },
+    {
+      "id": "importlib-metadata",
+      "name": "importlib-metadata",
+      "ecosystem": "pypi",
+      "version": "9.0.1",
+      "direct_deps": {
+        "zipp": ">=3.20"
+      },
+      "all_deps": [
+        "zipp"
+      ],
+      "publish_date": "2026-08-28T15:30:33.433425Z",
+      "maintainers": [
+        "\"Jason R. Coombs\""
+      ],
+      "license": "Apache-2.0",
+      "downloads": null,
+      "description": "Read metadata from Python packages",
+      "in_degree": 0,
+      "out_degree": 1,
+      "reachability_count": 0,
+      "composite_score": 0.0,
+      "vulnerabilities": []
+    },
+    {
+      "id": "itsdangerous",
+      "name": "itsdangerous",
+      "ecosystem": "pypi",
+      "version": "2.2.0",
+      "direct_deps": {},
+      "all_deps": [],
+      "publish_date": "2024-04-16T21:28:14.499616Z",
+      "maintainers": [
+        "Pallets"
+      ],
+      "license": null,
+      "downloads": null,
+      "description": "Safely pass data to untrusted environments and back.",
+      "in_degree": 0,
+      "out_degree": 0,
+      "reachability_count": 0,
+      "composite_score": 0.0,
+      "vulnerabilities": []
+    },
+    {
+      "id": "jinja2",
+      "name": "jinja2",
+      "ecosystem": "pypi",
+      "version": "3.1.6",
+      "direct_deps": {
+        "markupsafe": ">=2.0"
+      },
+      "all_deps": [
+        "markupsafe"
+      ],
+      "publish_date": "2025-03-05T20:05:00.369721Z",
+      "maintainers": [
+        "Pallets"
+      ],
+      "license": null,
+      "downloads": null,
+      "description": "A very fast and expressive template engine.",
+      "in_degree": 0,
+      "out_degree": 1,
+      "reachability_count": 0,
+      "composite_score": 0.0,
+      "vulnerabilities": []
+    },
+    {
+      "id": "markupsafe",
+      "name": "markupsafe",
+      "ecosystem": "pypi",
+      "version": "3.0.3",
+      "direct_deps": {},
+      "all_deps": [],
+      "publish_date": "2025-09-27T18:36:05.558229Z",
+      "maintainers": [
+        "Pallets"
+      ],
+      "license": "BSD-3-Clause",
+      "downloads": null,
+      "description": "Safely add untrusted strings to HTML/XML markup.",
+      "in_degree": 0,
+      "out_degree": 0,
+      "reachability_count": 0,
+      "composite_score": 0.0,
+      "vulnerabilities": []
+    },
+    {
+      "id": "werkzeug",
+      "name": "werkzeug",
+      "ecosystem": "pypi",
+      "version": "3.1.8",
+      "direct_deps": {
+        "markupsafe": ">=2.1.1"
+      },
+      "all_deps": [
+        "markupsafe"
+      ],
+      "publish_date": "2026-04-02T18:49:12.720503Z",
+      "maintainers": [
+        "Pallets"
+      ],
+      "license": "BSD-3-Clause",
+      "downloads": null,
+      "description": "The comprehensive WSGI web application library.",
+      "in_degree": 0,
+      "out_degree": 1,
+      "reachability_count": 0,
+      "composite_score": 0.0,
+      "vulnerabilities": []
+    },
+    {
+      "id": "asgiref",
+      "name": "asgiref",
+      "ecosystem": "pypi",
+      "version": "3.12.1",
+      "direct_deps": {
+        "typing-extensions": ">=4"
+      },
+      "all_deps": [
+        "typing-extensions"
+      ],
+      "publish_date": "2026-07-14T09:56:16.926319Z",
+      "maintainers": [
+        "Django Software Foundation",
+        "foundation@djangoproject.com"
+      ],
+      "license": "BSD-3-Clause",
+      "downloads": null,
+      "description": "ASGI specs, helper code, and adapters",
+      "in_degree": 0,
+      "out_degree": 1,
+      "reachability_count": 0,
+      "composite_score": 0.0,
+      "vulnerabilities": []
+    },
+    {
+      "id": "sqlparse",
+      "name": "sqlparse",
+      "ecosystem": "pypi",
+      "version": "0.6.0",
+      "direct_deps": {},
+      "all_deps": [],
+      "publish_date": "2026-08-13T19:16:04.062771Z",
+      "maintainers": [
+        "Andi Albrecht"
+      ],
+      "license": null,
+      "downloads": null,
+      "description": "A non-validating SQL parser.",
+      "in_degree": 0,
+      "out_degree": 0,
+      "reachability_count": 0,
+      "composite_score": 0.0,
+      "vulnerabilities": []
+    },
+    {
+      "id": "tzdata",
+      "name": "tzdata",
+      "ecosystem": "pypi",
+      "version": "2026.4",
+      "direct_deps": {},
+      "all_deps": [],
+      "publish_date": "2026-09-12T12:56:01.670969Z",
+      "maintainers": [
+        "Python Software Foundation",
+        "datetime-sig@python.org"
+      ],
+      "license": "Apache-2.0",
+      "downloads": null,
+      "description": "Provider of IANA time zone data",
+      "in_degree": 0,
+      "out_degree": 0,
+      "reachability_count": 0,
+      "composite_score": 0.0,
+      "vulnerabilities": []
+    },
+    {
+      "id": "starlette",
+      "name": "starlette",
+      "ecosystem": "pypi",
+      "version": "1.6.0",
+      "direct_deps": {
+        "anyio": "<5,>=3.6.2",
+        "typing-extensions": ">=4.10.0"
+      },
+      "all_deps": [
+        "anyio",
+        "typing-extensions"
+      ],
+      "publish_date": "2026-08-08T18:27:56.196765Z",
+      "maintainers": [
+        "Tom Christie",
+        "Marcelo Trylesinski"
+      ],
+      "license": "BSD-3-Clause",
+      "downloads": null,
+      "description": "The little ASGI library that shines.",
+      "in_degree": 0,
+      "out_degree": 2,
+      "reachability_count": 0,
+      "composite_score": 0.0,
+      "vulnerabilities": []
+    },
+    {
+      "id": "pydantic",
+      "name": "pydantic",
+      "ecosystem": "pypi",
+      "version": "2.13.5",
+      "direct_deps": {
+        "annotated-types": ">=0.6.0",
+        "pydantic-core": "==2.46.5",
+        "typing-extensions": ">=4.14.1",
+        "typing-inspection": ">=0.4.2"
+      },
+      "all_deps": [
+        "annotated-types",
+        "pydantic-core",
+        "typing-extensions",
+        "typing-inspection"
+      ],
+      "publish_date": "2026-08-28T14:03:59.136157Z",
+      "maintainers": [
+        "Samuel Colvin",
+        "Eric Jolibois",
+        "Hasan Ramezani",
+        "Adrian Garcia Badaracco",
+        "Terrence Dorsey",
+        "David Montague",
+        "Serge Matveenko",
+        "Marcelo Trylesinski",
+        "Sydney Runkle",
+        "David Hewitt",
+        "Alex Hall",
+        "Victorien Plot"
+      ],
+      "license": "MIT",
+      "downloads": null,
+      "description": "Data validation using Python type hints",
+      "in_degree": 0,
+      "out_degree": 4,
+      "reachability_count": 0,
+      "composite_score": 0.0,
+      "vulnerabilities": []
+    },
+    {
+      "id": "typing-extensions",
+      "name": "typing-extensions",
+      "ecosystem": "pypi",
+      "version": "4.16.0",
+      "direct_deps": {},
+      "all_deps": [],
+      "publish_date": "2026-07-02T08:40:04.659120Z",
+      "maintainers": [
+        "\"Guido van Rossum",
+        "Jukka Lehtosalo",
+        "\u0141ukasz Langa",
+        "Michael Lee\""
+      ],
+      "license": "PSF-2.0",
+      "downloads": null,
+      "description": "Backported and Experimental Type Hints for Python 3.9+",
+      "in_degree": 0,
+      "out_degree": 0,
+      "reachability_count": 0,
+      "composite_score": 0.0,
+      "vulnerabilities": []
+    },
+    {
+      "id": "typing-inspection",
+      "name": "typing-inspection",
+      "ecosystem": "pypi",
+      "version": "0.4.4",
+      "direct_deps": {
+        "typing-extensions": ">=4.15.0"
+      },
+      "all_deps": [
+        "typing-extensions"
+      ],
+      "publish_date": "2026-08-12T12:37:24.648475Z",
+      "maintainers": [
+        "Victorien Plot"
+      ],
+      "license": "MIT",
+      "downloads": null,
+      "description": "Runtime typing introspection tools",
+      "in_degree": 0,
+      "out_degree": 1,
+      "reachability_count": 0,
+      "composite_score": 0.0,
+      "vulnerabilities": []
+    },
+    {
+      "id": "annotated-doc",
+      "name": "annotated-doc",
+      "ecosystem": "pypi",
+      "version": "0.0.5",
+      "direct_deps": {},
+      "all_deps": [],
+      "publish_date": "2026-07-28T13:50:57.239109Z",
+      "maintainers": [
+        "Sebasti\u00e1n Ram\u00edrez"
+      ],
+      "license": "MIT",
+      "downloads": null,
+      "description": "Document parameters, class attributes, return types, and variables inline, with Annotated.",
+      "in_degree": 0,
+      "out_degree": 0,
+      "reachability_count": 0,
+      "composite_score": 0.0,
+      "vulnerabilities": []
+    },
+    {
+      "id": "colorama",
+      "name": "colorama",
+      "ecosystem": "pypi",
+      "version": "0.4.6",
+      "direct_deps": {},
+      "all_deps": [],
+      "publish_date": "2022-10-25T02:36:20.889702Z",
+      "maintainers": [
+        "Jonathan Hartley"
+      ],
+      "license": null,
+      "downloads": null,
+      "description": "Cross-platform colored terminal text.",
+      "in_degree": 0,
+      "out_degree": 0,
+      "reachability_count": 0,
+      "composite_score": 0.0,
+      "vulnerabilities": []
+    },
+    {
+      "id": "exceptiongroup",
+      "name": "exceptiongroup",
+      "ecosystem": "pypi",
+      "version": "1.3.1",
+      "direct_deps": {
+        "typing-extensions": ">=4.6.0"
+      },
+      "all_deps": [
+        "typing-extensions"
+      ],
+      "publish_date": "2025-11-21T23:01:53.443434Z",
+      "maintainers": [
+        "Alex Gr\u00f6nholm"
+      ],
+      "license": null,
+      "downloads": null,
+      "description": "Backport of PEP 654 (exception groups)",
+      "in_degree": 0,
+      "out_degree": 1,
+      "reachability_count": 0,
+      "composite_score": 0.0,
+      "vulnerabilities": []
+    },
+    {
+      "id": "iniconfig",
+      "name": "iniconfig",
+      "ecosystem": "pypi",
+      "version": "2.3.0",
+      "direct_deps": {},
+      "all_deps": [],
+      "publish_date": "2025-10-18T21:55:41.639305Z",
+      "maintainers": [
+        "Ronny Pfannschmidt",
+        "Holger Krekel"
+      ],
+      "license": "MIT",
+      "downloads": null,
+      "description": "brain-dead simple config-ini parsing",
+      "in_degree": 0,
+      "out_degree": 0,
+      "reachability_count": 0,
+      "composite_score": 0.0,
+      "vulnerabilities": []
+    },
+    {
+      "id": "packaging",
+      "name": "packaging",
+      "ecosystem": "pypi",
+      "version": "26.3",
+      "direct_deps": {},
+      "all_deps": [],
+      "publish_date": "2026-08-04T18:15:27.159957Z",
+      "maintainers": [
+        "Donald Stufft"
+      ],
+      "license": "Apache-2.0 OR BSD-2-Clause",
+      "downloads": null,
+      "description": "Core utilities for Python packages",
+      "in_degree": 0,
+      "out_degree": 0,
+      "reachability_count": 0,
+      "composite_score": 0.0,
+      "vulnerabilities": []
+    },
+    {
+      "id": "pluggy",
+      "name": "pluggy",
+      "ecosystem": "pypi",
+      "version": "1.6.0",
+      "direct_deps": {},
+      "all_deps": [],
+      "publish_date": "2025-05-15T12:30:06.134003Z",
+      "maintainers": [
+        "Holger Krekel"
+      ],
+      "license": "MIT",
+      "downloads": null,
+      "description": "plugin and hook calling mechanisms for python",
+      "in_degree": 0,
+      "out_degree": 0,
+      "reachability_count": 0,
+      "composite_score": 0.0,
+      "vulnerabilities": []
+    },
+    {
+      "id": "pygments",
+      "name": "pygments",
+      "ecosystem": "pypi",
+      "version": "2.21.0",
+      "direct_deps": {},
+      "all_deps": [],
+      "publish_date": "2026-08-17T08:02:44.912148Z",
+      "maintainers": [
+        "Matth\u00e4us G. Chajdas",
+        "Georg Brandl",
+        "Jean Abou Samra"
+      ],
+      "license": "BSD-2-Clause",
+      "downloads": null,
+      "description": "Pygments is a syntax highlighting package written in Python.",
+      "in_degree": 0,
+      "out_degree": 0,
+      "reachability_count": 0,
+      "composite_score": 0.0,
+      "vulnerabilities": []
+    },
+    {
+      "id": "tomli",
+      "name": "tomli",
+      "ecosystem": "pypi",
+      "version": "2.4.1",
+      "direct_deps": {},
+      "all_deps": [],
+      "publish_date": "2026-03-25T20:21:10.473841Z",
+      "maintainers": [
+        "Taneli Hukkinen"
+      ],
+      "license": "MIT",
+      "downloads": null,
+      "description": "A lil' TOML parser",
+      "in_degree": 0,
+      "out_degree": 0,
+      "reachability_count": 0,
+      "composite_score": 0.0,
+      "vulnerabilities": []
+    },
+    {
+      "id": "zipp",
+      "name": "zipp",
+      "ecosystem": "pypi",
+      "version": "4.1.0",
+      "direct_deps": {},
+      "all_deps": [],
+      "publish_date": "2026-05-18T20:08:57.045692Z",
+      "maintainers": [
+        "\"Jason R. Coombs\""
+      ],
+      "license": "MIT",
+      "downloads": null,
+      "description": "Backport of pathlib-compatible object wrapper for zip files",
+      "in_degree": 0,
+      "out_degree": 0,
+      "reachability_count": 0,
+      "composite_score": 0.0,
+      "vulnerabilities": []
+    },
+    {
+      "id": "anyio",
+      "name": "anyio",
+      "ecosystem": "pypi",
+      "version": "4.15.1",
+      "direct_deps": {
+        "exceptiongroup": ">=1.0.2",
+        "idna": ">=2.8",
+        "typing-extensions": ">=4.16.0"
+      },
+      "all_deps": [
+        "exceptiongroup",
+        "idna",
+        "typing-extensions"
+      ],
+      "publish_date": "2026-09-05T10:42:37.923487Z",
+      "maintainers": [
+        "Alex Gr\u00f6nholm"
+      ],
+      "license": "MIT",
+      "downloads": null,
+      "description": "High-level concurrency and networking framework on top of asyncio or Trio",
+      "in_degree": 0,
+      "out_degree": 3,
+      "reachability_count": 0,
+      "composite_score": 0.0,
+      "vulnerabilities": []
+    },
+    {
+      "id": "annotated-types",
+      "name": "annotated-types",
+      "ecosystem": "pypi",
+      "version": "0.8.0",
+      "direct_deps": {},
+      "all_deps": [],
+      "publish_date": "2026-07-23T20:16:12.938651Z",
+      "maintainers": [
+        "Adrian Garcia Badaracco",
+        "Samuel Colvin",
+        "Zac Hatfield-Dodds"
+      ],
+      "license": "MIT",
+      "downloads": null,
+      "description": "Reusable constraint types to use with typing.Annotated",
+      "in_degree": 0,
+      "out_degree": 0,
+      "reachability_count": 0,
+      "composite_score": 0.0,
+      "vulnerabilities": []
+    },
+    {
+      "id": "pydantic-core",
+      "name": "pydantic-core",
+      "ecosystem": "pypi",
+      "version": "2.49.0",
+      "direct_deps": {
+        "typing-extensions": ">=4.16.0"
+      },
+      "all_deps": [
+        "typing-extensions"
+      ],
+      "publish_date": "2026-09-09T21:25:29.286931Z",
+      "maintainers": [
+        "Samuel Colvin",
+        "Adrian Garcia Badaracco",
+        "David Montague",
+        "David Hewitt",
+        "Sydney Runkle",
+        "Victorien Plot"
+      ],
+      "license": "MIT",
+      "downloads": null,
+      "description": "Core functionality for Pydantic validation and serialization",
+      "in_degree": 0,
+      "out_degree": 1,
+      "reachability_count": 0,
+      "composite_score": 0.0,
+      "vulnerabilities": []
+    }
+  ],
+  "edges": [
+    {
+      "source": "requests",
+      "target": "charset-normalizer",
+      "version_spec": "<4,>=2",
+      "is_dev": false
+    },
+    {
+      "source": "requests",
+      "target": "idna",
+      "version_spec": "<4,>=2.5",
+      "is_dev": false
+    },
+    {
+      "source": "requests",
+      "target": "urllib3",
+      "version_spec": "<3,>=1.26",
+      "is_dev": false
+    },
+    {
+      "source": "requests",
+      "target": "certifi",
+      "version_spec": ">=2023.5.7",
+      "is_dev": false
+    },
+    {
+      "source": "flask",
+      "target": "blinker",
+      "version_spec": ">=1.9.0",
+      "is_dev": false
+    },
+    {
+      "source": "flask",
+      "target": "click",
+      "version_spec": ">=8.1.3",
+      "is_dev": false
+    },
+    {
+      "source": "flask",
+      "target": "importlib-metadata",
+      "version_spec": ">=3.6.0",
+      "is_dev": false
+    },
+    {
+      "source": "flask",
+      "target": "itsdangerous",
+      "version_spec": ">=2.2.0",
+      "is_dev": false
+    },
+    {
+      "source": "flask",
+      "target": "jinja2",
+      "version_spec": ">=3.1.2",
+      "is_dev": false
+    },
+    {
+      "source": "flask",
+      "target": "markupsafe",
+      "version_spec": ">=2.1.1",
+      "is_dev": false
+    },
+    {
+      "source": "flask",
+      "target": "werkzeug",
+      "version_spec": ">=3.1.0",
+      "is_dev": false
+    },
+    {
+      "source": "django",
+      "target": "asgiref",
+      "version_spec": ">=3.9.1",
+      "is_dev": false
+    },
+    {
+      "source": "django",
+      "target": "sqlparse",
+      "version_spec": ">=0.5.0",
+      "is_dev": false
+    },
+    {
+      "source": "django",
+      "target": "tzdata",
+      "version_spec": "*",
+      "is_dev": false
+    },
+    {
+      "source": "fastapi",
+      "target": "starlette",
+      "version_spec": ">=0.46.0",
+      "is_dev": false
+    },
+    {
+      "source": "fastapi",
+      "target": "pydantic",
+      "version_spec": ">=2.9.0",
+      "is_dev": false
+    },
+    {
+      "source": "fastapi",
+      "target": "typing-extensions",
+      "version_spec": ">=4.8.0",
+      "is_dev": false
+    },
+    {
+      "source": "fastapi",
+      "target": "typing-inspection",
+      "version_spec": ">=0.4.2",
+      "is_dev": false
+    },
+    {
+      "source": "fastapi",
+      "target": "annotated-doc",
+      "version_spec": ">=0.0.2",
+      "is_dev": false
+    },
+    {
+      "source": "pytest",
+      "target": "colorama",
+      "version_spec": ">=0.4",
+      "is_dev": false
+    },
+    {
+      "source": "pytest",
+      "target": "exceptiongroup",
+      "version_spec": ">=1",
+      "is_dev": false
+    },
+    {
+      "source": "pytest",
+      "target": "iniconfig",
+      "version_spec": ">=1.0.1",
+      "is_dev": false
+    },
+    {
+      "source": "pytest",
+      "target": "packaging",
+      "version_spec": ">=22",
+      "is_dev": false
+    },
+    {
+      "source": "pytest",
+      "target": "pluggy",
+      "version_spec": "<2,>=1.5",
+      "is_dev": false
+    },
+    {
+      "source": "pytest",
+      "target": "pygments",
+      "version_spec": ">=2.7.2",
+      "is_dev": false
+    },
+    {
+      "source": "pytest",
+      "target": "tomli",
+      "version_spec": ">=1",
+      "is_dev": false
+    },
+    {
+      "source": "importlib-metadata",
+      "target": "zipp",
+      "version_spec": ">=3.20",
+      "is_dev": false
+    },
+    {
+      "source": "jinja2",
+      "target": "markupsafe",
+      "version_spec": ">=2.0",
+      "is_dev": false
+    },
+    {
+      "source": "werkzeug",
+      "target": "markupsafe",
+      "version_spec": ">=2.1.1",
+      "is_dev": false
+    },
+    {
+      "source": "asgiref",
+      "target": "typing-extensions",
+      "version_spec": ">=4",
+      "is_dev": false
+    },
+    {
+      "source": "starlette",
+      "target": "anyio",
+      "version_spec": "<5,>=3.6.2",
+      "is_dev": false
+    },
+    {
+      "source": "starlette",
+      "target": "typing-extensions",
+      "version_spec": ">=4.10.0",
+      "is_dev": false
+    },
+    {
+      "source": "pydantic",
+      "target": "annotated-types",
+      "version_spec": ">=0.6.0",
+      "is_dev": false
+    },
+    {
+      "source": "pydantic",
+      "target": "pydantic-core",
+      "version_spec": "==2.46.5",
+      "is_dev": false
+    },
+    {
+      "source": "pydantic",
+      "target": "typing-extensions",
+      "version_spec": ">=4.14.1",
+      "is_dev": false
+    },
+    {
+      "source": "pydantic",
+      "target": "typing-inspection",
+      "version_spec": ">=0.4.2",
+      "is_dev": false
+    },
+    {
+      "source": "typing-inspection",
+      "target": "typing-extensions",
+      "version_spec": ">=4.15.0",
+      "is_dev": false
+    },
+    {
+      "source": "exceptiongroup",
+      "target": "typing-extensions",
+      "version_spec": ">=4.6.0",
+      "is_dev": false
+    }
+  ]
+}
