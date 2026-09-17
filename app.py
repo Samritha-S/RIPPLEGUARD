@@ -292,6 +292,79 @@ st.markdown(
         margin-top: 24px;
         margin-bottom: 24px;
     }
+
+    /* Landing Page Styling */
+    .landing-welcome-box {
+        text-align: center;
+        padding: 6px 0 24px 0;
+        max-width: 840px;
+        margin: 0 auto;
+    }
+    .landing-welcome-title {
+        color: #ffffff;
+        font-size: 1.6rem;
+        font-weight: 700;
+        letter-spacing: -0.3px;
+        margin-bottom: 8px;
+    }
+    .landing-welcome-desc {
+        color: var(--text-muted);
+        font-size: 1.02rem;
+        line-height: 1.5;
+        margin: 0 auto;
+    }
+    .landing-card-top {
+        background: #091a1d;
+        border: 1px solid var(--peacock-border);
+        border-radius: 12px;
+        padding: 24px;
+        margin-bottom: 12px;
+        transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    }
+    .landing-card-top:hover {
+        border-color: var(--lavender-vibrant);
+        box-shadow: 0 6px 24px rgba(179, 136, 235, 0.15);
+        transform: translateY(-2px);
+    }
+    .landing-card-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 12px;
+    }
+    .landing-card-icon {
+        font-size: 2rem;
+        line-height: 1;
+    }
+    .landing-card-title {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--lavender-accent);
+        margin: 0;
+    }
+    .landing-card-desc {
+        color: var(--text-muted);
+        font-size: 0.95rem;
+        line-height: 1.5;
+        margin-bottom: 14px;
+    }
+    .landing-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-bottom: 8px;
+    }
+    .landing-badge {
+        display: inline-block;
+        background: rgba(0, 95, 115, 0.25);
+        border: 1px solid #0a9396;
+        color: #e0e7e9;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 0.76rem;
+        font-weight: 600;
+    }
     </style>
     """,
     unsafe_allow_html=True
@@ -345,12 +418,15 @@ def fetch_cached_osv_cvss(pkg_name: str, ecosystem: str):
     return query_osv_package(pkg_name, ecosystem)
 
 
-# Check if user uploaded a custom manifest or selected PyPI
-uploaded_file = st.session_state.get("manifest_uploader")
-selected_ecosystem = st.session_state.get("ecosystem_selector", "npm (Node.js)")
-manifest_error = None
-
-if uploaded_file is not None:
+def process_uploaded_manifest(uploaded_file):
+    """
+    Unified manifest/SBOM parser and graph constructor.
+    Shared identically by both the Landing Page uploader and Dashboard Sidebar uploader.
+    Returns:
+        tuple: (raw_data, G, metrics, max_in, max_trans, active_source_label, is_custom_upload, manifest_error)
+    """
+    if uploaded_file is None:
+        return None, None, None, 1, 1, None, False, None
     try:
         raw_data = parse_manifest_content(uploaded_file.getvalue(), filename=uploaded_file.name)
         G = build_dependency_graph(raw_data)
@@ -359,11 +435,147 @@ if uploaded_file is not None:
         max_trans = max((m["transitive_dependents_count"] for m in metrics.values()), default=1)
         active_source_label = f"Uploaded: {uploaded_file.name}"
         is_custom_upload = True
+        return raw_data, G, metrics, max_in, max_trans, active_source_label, is_custom_upload, None
     except ManifestParseError as err:
-        manifest_error = str(err)
-        raw_data, G, metrics, max_in, max_trans = load_demo_graph_data()
-        active_source_label = "Demo dataset (5 npm seeds)"
-        is_custom_upload = False
+        return None, None, None, 1, 1, None, False, str(err)
+
+
+# ---------------------------------------------------------
+# View Routing: Landing / Entry Page vs. Dashboard
+# ---------------------------------------------------------
+if "active_view" not in st.session_state:
+    st.session_state["active_view"] = "landing"
+
+if st.session_state.get("active_view", "landing") == "landing":
+    # Header Banner (Peacock Green & Lavender Palette)
+    render_html(
+        """
+        <div class="header-box">
+            <div class="header-title">
+                <span>🛡️ RippleGuard</span>
+            </div>
+            <div class="header-subtitle">
+                Explainable Dependency-Risk Intelligence &amp; Blast-Radius Simulator
+            </div>
+            <div class="sdg-tag">
+                🎯 SDG 9: Industry, Innovation &amp; Infrastructure • Software Supply Chain Security
+            </div>
+        </div>
+        """
+    )
+
+    render_html(
+        """
+        <div class="landing-welcome-box">
+            <div class="landing-welcome-title">Get Started with Dependency Risk Intelligence</div>
+            <p class="landing-welcome-desc">
+                Choose how you want to inspect supply chain fragility, trace cascading blast radii, and prioritize remediation fixes:
+            </p>
+        </div>
+        """
+    )
+
+    card_col1, card_col2 = st.columns(2, gap="large")
+
+    with card_col1:
+        render_html(
+            """
+            <div class="landing-card-top">
+                <div class="landing-card-header">
+                    <span class="landing-card-icon">📂</span>
+                    <h3 class="landing-card-title">Upload Your Own Project</h3>
+                </div>
+                <p class="landing-card-desc">
+                    Analyze your real package-lock.json or SBOM, entirely offline.
+                </p>
+                <div class="landing-badges">
+                    <span class="landing-badge">npm package-lock.json (v1, v2, v3)</span>
+                    <span class="landing-badge">CycloneDX 1.5 JSON SBOM</span>
+                    <span class="landing-badge">100% Offline &amp; Private</span>
+                </div>
+            </div>
+            """
+        )
+        landing_file = st.file_uploader(
+            "Upload package-lock.json or CycloneDX JSON",
+            type=["json"],
+            key="landing_manifest_uploader",
+            help="Upload an npm package-lock.json or CycloneDX JSON SBOM to evaluate your own project's dependency graph."
+        )
+        if landing_file is not None:
+            res = process_uploaded_manifest(landing_file)
+            if res[-1]:
+                st.error(f"Manifest parsing error: {res[-1]}")
+            else:
+                st.session_state["uploaded_manifest_raw"] = res[0]
+                st.session_state["uploaded_manifest_name"] = landing_file.name
+                st.session_state["data_source"] = "upload"
+                st.session_state["active_view"] = "dashboard"
+                st.rerun()
+
+    with card_col2:
+        render_html(
+            """
+            <div class="landing-card-top">
+                <div class="landing-card-header">
+                    <span class="landing-card-icon">🛡️</span>
+                    <h3 class="landing-card-title">Try the Demo Dataset</h3>
+                </div>
+                <p class="landing-card-desc">
+                    Explore a real 64-package npm dependency graph, no upload needed.
+                </p>
+                <div class="landing-badges">
+                    <span class="landing-badge">64 Curated npm Packages</span>
+                    <span class="landing-badge">Pre-computed Centrality &amp; CVSS</span>
+                    <span class="landing-badge">Multi-Hop Blast Simulation</span>
+                </div>
+            </div>
+            """
+        )
+        st.markdown("<div style='height: 48px;'></div>", unsafe_allow_html=True)
+        if st.button("🛡️ Try the Demo Dataset", type="primary", use_container_width=True, key="btn_try_demo"):
+            st.session_state["active_view"] = "dashboard"
+            st.session_state["data_source"] = "demo"
+            st.session_state.pop("uploaded_manifest_raw", None)
+            st.session_state.pop("uploaded_manifest_name", None)
+            st.rerun()
+
+    with st.sidebar:
+        render_html(
+            """
+            <h3 style="color:#c8b6ff; margin-bottom:8px;">🛡️ RippleGuard</h3>
+            <p style="color:#9bb3b8; font-size:0.85rem;">
+                Supply Chain Risk Intelligence &amp; Fragility Analysis.
+            </p>
+            <div style="background:rgba(0, 95, 115, 0.25); border:1px solid #0a9396; border-radius:6px; padding:10px 12px; margin-top:14px;">
+                <span style="font-size:0.82rem; color:#f0f7f8; font-weight:600;">👋 Getting Started:</span>
+                <p style="font-size:0.78rem; color:#9bb3b8; margin-top:4px; margin-bottom:0;">
+                    Select a data source on the main screen to begin:
+                </p>
+                <ul style="font-size:0.78rem; color:#c8b6ff; margin-top:6px; padding-left:18px; margin-bottom:0;">
+                    <li><b>Upload:</b> Your real project lockfile or SBOM</li>
+                    <li><b>Demo:</b> Real 64-package npm ecosystem graph</li>
+                </ul>
+            </div>
+            """
+        )
+
+    st.stop()
+
+# ---------------------------------------------------------
+# Load Data & Construct Graph (Dashboard Active View)
+# ---------------------------------------------------------
+selected_ecosystem = st.session_state.get("ecosystem_selector", "npm (Node.js)")
+manifest_error = None
+
+if st.session_state.get("data_source") == "upload" and st.session_state.get("uploaded_manifest_raw"):
+    raw_data = st.session_state["uploaded_manifest_raw"]
+    G = build_dependency_graph(raw_data)
+    metrics = compute_structural_metrics(G)
+    max_in = max((m["in_degree"] for m in metrics.values()), default=1)
+    max_trans = max((m["transitive_dependents_count"] for m in metrics.values()), default=1)
+    active_source_label = f"Uploaded: {st.session_state.get('uploaded_manifest_name', 'manifest.json')}"
+    is_custom_upload = True
 elif "PyPI" in selected_ecosystem:
     raw_data, G, metrics, max_in, max_trans = load_pypi_graph_data()
     active_source_label = "Demo dataset (5 PyPI seeds)"
@@ -398,9 +610,17 @@ if "compromised_nodes" not in st.session_state:
 # Sidebar Controls & Weighting Tuning (FR-3.3)
 # ---------------------------------------------------------
 with st.sidebar:
+    if st.button("← Change Data Source", use_container_width=True, key="btn_change_data_source_sidebar"):
+        st.session_state["active_view"] = "landing"
+        st.session_state.pop("uploaded_manifest_raw", None)
+        st.session_state.pop("uploaded_manifest_name", None)
+        st.session_state.pop("landing_manifest_uploader", None)
+        st.session_state.pop("sidebar_manifest_uploader", None)
+        st.rerun()
+
     render_html(
         """
-        <h3 style="color:#c8b6ff; margin-bottom:8px;">⚙️ RippleGuard Controls</h3>
+        <h3 style="color:#c8b6ff; margin-bottom:8px; margin-top:6px;">⚙️ RippleGuard Controls</h3>
         <p style="color:#9bb3b8; font-size:0.85rem;">
             Inspect structural fragility across the open-source dependency ecosystem.
         </p>
@@ -546,18 +766,31 @@ with st.sidebar:
             "</div>",
             unsafe_allow_html=True
         )
-        uploaded_manifest_widget = st.file_uploader(
+        sidebar_manifest_widget = st.file_uploader(
             "Upload package-lock.json or CycloneDX JSON",
             type=["json"],
-            key="manifest_uploader",
+            key="sidebar_manifest_uploader",
             help="Upload an npm package-lock.json or CycloneDX JSON SBOM to evaluate your own project's dependency graph."
         )
-        if manifest_error:
-            st.error(f"Manifest parsing error: {manifest_error}")
+        if sidebar_manifest_widget is not None:
+            res = process_uploaded_manifest(sidebar_manifest_widget)
+            if res[-1]:
+                st.error(f"Manifest parsing error: {res[-1]}")
+            else:
+                st.session_state["uploaded_manifest_raw"] = res[0]
+                st.session_state["uploaded_manifest_name"] = sidebar_manifest_widget.name
+                st.session_state["data_source"] = "upload"
+                st.session_state["active_view"] = "dashboard"
+                st.rerun()
+
         if is_custom_upload:
             st.success(f"Loaded {len(G.nodes())} packages and {len(G.edges())} dependency edges.")
             if st.button("↺ Return to Demo Dataset", key="reset_demo_btn"):
-                del st.session_state["manifest_uploader"]
+                st.session_state.pop("uploaded_manifest_raw", None)
+                st.session_state.pop("uploaded_manifest_name", None)
+                st.session_state.pop("landing_manifest_uploader", None)
+                st.session_state.pop("sidebar_manifest_uploader", None)
+                st.session_state["data_source"] = "demo"
                 st.rerun()
 
     # FR-1.2: Live Registry Re-crawl for Selected Ecosystem
@@ -643,21 +876,32 @@ for node in G.nodes():
 # ---------------------------------------------------------
 # Top Header Banner
 # ---------------------------------------------------------
-render_html(
-    """
-    <div class="header-box">
-        <div class="header-title">
-            <span>🛡️ RippleGuard</span>
+col_head, col_chg = st.columns([4.4, 1.2])
+with col_head:
+    render_html(
+        """
+        <div class="header-box" style="margin-bottom:12px;">
+            <div class="header-title">
+                <span>🛡️ RippleGuard</span>
+            </div>
+            <div class="header-subtitle">
+                Explainable Dependency-Risk Intelligence &amp; Blast-Radius Simulator
+            </div>
+            <div class="sdg-tag">
+                🎯 SDG 9: Industry, Innovation &amp; Infrastructure • Software Supply Chain Security
+            </div>
         </div>
-        <div class="header-subtitle">
-            Explainable Dependency-Risk Intelligence & Blast-Radius Simulator
-        </div>
-        <div class="sdg-tag">
-            🎯 SDG 9: Industry, Innovation & Infrastructure • Software Supply Chain Security
-        </div>
-    </div>
-    """
-)
+        """
+    )
+with col_chg:
+    st.markdown("<div style='height:16px;'></div>", unsafe_allow_html=True)
+    if st.button("← Change Data Source", key="main_change_source_btn", use_container_width=True):
+        st.session_state["active_view"] = "landing"
+        st.session_state.pop("uploaded_manifest_raw", None)
+        st.session_state.pop("uploaded_manifest_name", None)
+        st.session_state.pop("landing_manifest_uploader", None)
+        st.session_state.pop("sidebar_manifest_uploader", None)
+        st.rerun()
 
 # ---------------------------------------------------------
 # Top KPI Metric Cards

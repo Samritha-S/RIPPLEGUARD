@@ -7,15 +7,109 @@ if hasattr(sys.stdout, "reconfigure"):
 
 from playwright.sync_api import sync_playwright
 
+import tempfile
+
 SCREENSHOT_DIR = "ui_test_screenshots"
 os.makedirs(SCREENSHOT_DIR, exist_ok=True)
+
+SAMPLE_UPLOAD_FILE = os.path.join(tempfile.gettempdir(), "test_upload_sample.json")
+with open(SAMPLE_UPLOAD_FILE, "w", encoding="utf-8") as f:
+    f.write('{"name":"sample-playwright-project","version":"1.0.0","lockfileVersion":3,"packages":{"":{"name":"sample-playwright-project","version":"1.0.0","dependencies":{"express":"^4.19.2","ms":"^2.1.3"}},"node_modules/express":{"version":"4.19.2","dependencies":{"ms":"2.1.3"}},"node_modules/ms":{"version":"2.1.3"}}}')
 
 with sync_playwright() as p:
     browser = p.chromium.launch(headless=True)
     
     print("=" * 72)
-    print("🚀 RIPPLEGUARD PLAYWRIGHT LAYOUT & NAVIGATION POLISH AUDIT")
+    print("🚀 RIPPLEGUARD PLAYWRIGHT LAYOUT, LANDING PAGE & NAVIGATION AUDIT")
     print("=" * 72)
+
+    # ------------------------------------------------------------------
+    # TEST 0: Landing Page Verification & Screenshots (1600px & 1000px)
+    # ------------------------------------------------------------------
+    print("\n--- TEST 0: Landing Page Verification & State Isolation ---")
+    for width in [1600, 1000]:
+        page = browser.new_page(viewport={"width": width, "height": 950})
+        page.goto("http://localhost:8501", wait_until="networkidle")
+        page.wait_for_selector(".header-title", timeout=25000)
+        time.sleep(1)
+
+        # Confirm landing page welcome and cards
+        welcome_el = page.locator(".landing-welcome-title")
+        assert welcome_el.count() > 0, "Landing welcome title not found!"
+        assert "Get Started with Dependency Risk Intelligence" in welcome_el.inner_text()
+
+        card_titles = page.locator(".landing-card-title").all_inner_texts()
+        assert "Upload Your Own Project" in card_titles, "Upload card missing!"
+        assert "Try the Demo Dataset" in card_titles, "Demo card missing!"
+
+        # Confirm sticky nav bar and anchors are NOT present on cold start
+        navbar_count = page.locator(".nav-bar-container").count()
+        assert navbar_count == 0, f"Sticky nav bar should NOT be present on landing page (found {navbar_count})!"
+
+        graph_count = page.locator("#graph-section").count()
+        assert graph_count == 0, f"#graph-section should NOT be in DOM on landing page (found {graph_count})!"
+
+        dossier_count = page.locator("#dossier-section").count()
+        assert dossier_count == 0, f"#dossier-section should NOT be in DOM on landing page (found {dossier_count})!"
+
+        screenshot_path = f"{SCREENSHOT_DIR}/08_landing_page_{width}px.png"
+        page.screenshot(path=screenshot_path, full_page=False)
+        print(f"  • {width}px Viewport: Landing page rendered cleanly. 0 dashboard anchors visible.")
+        print(f"  📸 Saved {screenshot_path}")
+        page.close()
+
+    # ------------------------------------------------------------------
+    # TEST 0.1: Card 2 (Demo Dataset) End-to-End Click & Navigation
+    # ------------------------------------------------------------------
+    print("\n--- TEST 0.1: Card 2 (Demo Dataset) Click & Transition ---")
+    page = browser.new_page(viewport={"width": 1600, "height": 950})
+    page.goto("http://localhost:8501", wait_until="networkidle")
+    page.wait_for_selector(".header-title", timeout=25000)
+    time.sleep(1)
+
+    demo_btn = page.locator("button:has-text('Try the Demo Dataset')")
+    assert demo_btn.count() > 0, "Demo button not found on landing page!"
+    demo_btn.click()
+    page.wait_for_selector(".nav-bar-container", timeout=25000)
+    page.wait_for_selector("#graph-section", state="attached", timeout=25000)
+    page.wait_for_selector(".metric-card", timeout=25000)
+
+    assert page.locator(".nav-bar-container").count() > 0, "Sticky nav bar did not appear after demo click!"
+    assert page.locator("#graph-section").count() > 0, "Graph section anchor did not appear after demo click!"
+    assert page.locator(".metric-card").count() >= 4, "Top KPI metric cards missing in dashboard!"
+    print("  ✅ Clicked 'Try the Demo Dataset': Successfully transitioned into full dashboard!")
+
+    # ------------------------------------------------------------------
+    # TEST 0.2: "← Change Data Source" End-to-End Return Navigation
+    # ------------------------------------------------------------------
+    print("\n--- TEST 0.2: '← Change Data Source' Return to Landing Page ---")
+    change_btn = page.locator("button:has-text('Change Data Source')").first
+    assert change_btn.count() > 0, "'Change Data Source' button not found in dashboard!"
+    change_btn.click()
+    page.wait_for_selector(".landing-welcome-title", timeout=25000)
+    time.sleep(1)
+
+    assert page.locator(".nav-bar-container").count() == 0, "Nav bar should be gone after returning to landing page!"
+    assert page.locator(".landing-welcome-title").count() > 0, "Landing page welcome not visible after return!"
+    print("  ✅ Clicked '← Change Data Source': Successfully returned to landing page!")
+
+    # ------------------------------------------------------------------
+    # TEST 0.3: Card 1 (Upload Your Own Project) End-to-End File Upload
+    # ------------------------------------------------------------------
+    print("\n--- TEST 0.3: Card 1 (Upload Project) End-to-End File Upload ---")
+    file_input = page.locator("input[type='file']")
+    assert file_input.count() > 0, "Landing page file input not found!"
+    file_input.set_input_files(SAMPLE_UPLOAD_FILE)
+    page.wait_for_selector(".nav-bar-container", timeout=25000)
+    time.sleep(1)
+
+    assert page.locator(".nav-bar-container").count() > 0, "Nav bar did not appear after custom project upload!"
+    print("  ✅ Uploaded custom project from Card 1: Successfully compiled graph and entered dashboard!")
+
+    page.locator("button:has-text('Change Data Source')").first.click()
+    page.wait_for_selector(".landing-welcome-title", timeout=25000)
+    time.sleep(1)
+    page.close()
 
     # ------------------------------------------------------------------
     # TEST 1: Viewport & Column Heights at 1600px and 1000px Viewports
@@ -25,6 +119,8 @@ with sync_playwright() as p:
         page = browser.new_page(viewport={"width": width, "height": 950})
         page.goto("http://localhost:8501", wait_until="networkidle")
         page.wait_for_selector(".header-title", timeout=25000)
+        page.locator("button:has-text('Try the Demo Dataset')").click()
+        page.wait_for_selector(".nav-bar-container", timeout=25000)
         time.sleep(1)
 
         boxes = page.evaluate("""() => {
@@ -91,6 +187,8 @@ with sync_playwright() as p:
     print("\n--- TEST 2: Sticky Nav Bar Positioning & Header Clearance ---")
     page = browser.new_page(viewport={"width": 1400, "height": 900})
     page.goto("http://localhost:8501", wait_until="networkidle")
+    page.wait_for_selector(".header-title", timeout=25000)
+    page.locator("button:has-text('Try the Demo Dataset')").click()
     page.wait_for_selector(".nav-bar-container", timeout=25000)
     time.sleep(1)
 
@@ -201,6 +299,8 @@ with sync_playwright() as p:
         page_t = browser.new_page(viewport={"width": width, "height": 950})
         page_t.goto("http://localhost:8501", wait_until="networkidle")
         page_t.wait_for_selector(".header-title", timeout=25000)
+        page_t.locator("button:has-text('Try the Demo Dataset')").click()
+        page_t.wait_for_selector(".nav-bar-container", timeout=25000)
         time.sleep(1)
 
         tutorial_expander = page_t.locator('[data-testid="stExpander"]:has-text("How to Use RippleGuard")')
